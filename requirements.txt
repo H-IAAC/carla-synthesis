@@ -1,0 +1,10 @@
+future
+numpy
+pygame
+matplotlib
+open3d
+Pillow
+shapely
+networkx
+carla
+psutil

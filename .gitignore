@@ -1,3 +1,14 @@
-vscode
-tmp
+CarlaUE4
+Co-Simulation
+Engine
+HDMaps
+Import
+Plugins
+PythonAPI
+Tools
+venv
+.venv
+run_carla/_out
+__pycache__
+.vscode
 data

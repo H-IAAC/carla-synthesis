@@ -56,25 +56,16 @@ class PositionModule:
                 gps_y.append(float(row['Y']))
                 gps_z.append(float(row['Z']))
 
-        fig, axs = plt.subplots(2, 1, figsize=(15, 15))
-
-        # Gráfico de coordenadas GPS ao longo do tempo
-        axs[0].plot(time, gps_x, label='Position X', color='blue')
-        axs[0].plot(time, gps_y, label='Position Y', color='orange')
-        axs[0].plot(time, gps_z, label='Position Z', color='green')
-        axs[0].set_ylabel('Position Coordinates (m)')
-        axs[0].legend()
-
-        # Gráfico de trajetória GPS com gradiente de cores
-        sc = axs[1].scatter(gps_x, gps_y, c=time, cmap='viridis', s=10, label='Trajectory')
-        axs[1].scatter(gps_x[0], gps_y[0], label='Start', color='green', s=100)
-        axs[1].scatter(gps_x[-1], gps_y[-1], label='End', color='orange', s=100)
-        axs[1].set_xlabel('Position X (m)')
-        axs[1].set_ylabel('Position Y (m)')
-        axs[1].legend()
-        fig.colorbar(sc, ax=axs[1], label='Time (s)')
-
-        fig.suptitle('Position Data over Time and Trajectory')
+        plt.figure(figsize=(15, 8))
+        sc = plt.scatter(gps_x, gps_y, c=time, cmap='viridis', s=10, label='Trajectory')
+        plt.scatter(gps_x[0], gps_y[0], label='Start', color='green', s=100)
+        plt.scatter(gps_x[-1], gps_y[-1], label='End', color='orange', s=100)
+        plt.xlabel('Position X (m)', fontsize=18)
+        plt.ylabel('Position Y (m)', fontsize=18)
+        plt.legend(fontsize=16)
+        plt.tick_params(axis='both', labelsize=16)
+        cbar = plt.colorbar(sc)
+        cbar.set_label('Time (s)', fontsize=18)
+        cbar.ax.tick_params(labelsize=16)
         plt.tight_layout()
         plt.savefig(f'{experiment_dir}/Position_{self.label}/Position.png')
-

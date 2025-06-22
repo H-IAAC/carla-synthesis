@@ -54,7 +54,6 @@ class VelocityModule:
         plt.plot(times, z_values, label='Z Velocity', color='b')
         plt.xlabel('Time (s)')
         plt.ylabel('Velocity (m/s)')
-        plt.title(f'Velocity Data for {self.label}')
         plt.legend()
         plt.grid(True)
 

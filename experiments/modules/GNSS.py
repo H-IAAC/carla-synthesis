@@ -11,9 +11,10 @@ class GNSS:
     time: float
     tick_time: float
 
-    def __init__(self, label, world, x, y, z, pitch, yaw, roll, tick_time, attached_ob=None):
+    def __init__(self, label, world, x, y, z, pitch, yaw, roll, tick_time, attached_ob=None, syncronous_mode=True):
         blueprint = world.get_blueprint_library().find('sensor.other.gnss')
-        blueprint.set_attribute('sensor_tick', str(tick_time))
+        if syncronous_mode:
+            blueprint.set_attribute('sensor_tick', str(tick_time))
         self.transform = carla.Transform(carla.Location(x=x, y=y, z=z), carla.Rotation(pitch=pitch, yaw=yaw, roll=roll))
         self.sensor = world.spawn_actor(blueprint, self.transform, attach_to=attached_ob)
         self.tick_time = tick_time
@@ -60,7 +61,6 @@ class GNSS:
         plt.figure(figsize=(10, 6))
         plt.subplot(3, 1, 1)
         plt.plot(self.data.keys(), latitudes, label='Latitude')
-        plt.title('GNSS Data')
         plt.ylabel('Latitude (°)')
         plt.grid()
 

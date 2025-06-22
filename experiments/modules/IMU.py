@@ -11,9 +11,10 @@ class IMU:
     time: float
     tick_time: float
 
-    def __init__(self, label, world, x, y, z, pitch, yaw, roll, tick_time, attached_ob=None):
+    def __init__(self, label, world, x, y, z, pitch, yaw, roll, tick_time, attached_ob=None, syncronous_mode=True):
         blueprint = world.get_blueprint_library().find('sensor.other.imu')
-        blueprint.set_attribute('sensor_tick', str(tick_time))
+        if syncronous_mode:
+            blueprint.set_attribute('sensor_tick', str(tick_time))
         self.transform = carla.Transform(carla.Location(x=x, y=y, z=z), carla.Rotation(pitch=pitch, yaw=yaw, roll=roll))
         self.sensor = world.spawn_actor(blueprint, self.transform, attach_to=attached_ob)
         self.tick_time = tick_time
@@ -84,10 +85,11 @@ class IMU:
         plt.plot(time, accel_x, label='Accel X', color='red')
         plt.plot(time, accel_y, label='Accel Y', color='green')
         plt.plot(time, accel_z, label='Accel Z', color='blue')
-        plt.xlabel('Time (s)')
-        plt.ylabel('Acceleration (m/s²)')
-        plt.title('Acceleration Data over Time')
-        plt.legend()
+        plt.xlabel('Time (s)', fontsize=18)
+        plt.ylabel('Acceleration (m/s²)', fontsize=18)
+        plt.legend(fontsize=16)
+        plt.xticks(fontsize=16)
+        plt.yticks(fontsize=16)
         plt.tight_layout()
         plt.savefig(f'{experiment_dir}/IMU_{self.label}/accel.png')
 
@@ -96,20 +98,22 @@ class IMU:
         plt.plot(time, gyro_x, label='Gyro X', color='red')
         plt.plot(time, gyro_y, label='Gyro Y', color='green')
         plt.plot(time, gyro_z, label='Gyro Z', color='blue')
-        plt.xlabel('Time (s)')
-        plt.ylabel('Angular Velocity (rad/s)')
-        plt.title('Gyroscope Data over Time')
-        plt.legend()
+        plt.xlabel('Time (s)', fontsize=18)
+        plt.ylabel('Angular Velocity (rad/s)', fontsize=18)
+        plt.legend(fontsize=16)
+        plt.xticks(fontsize=16)
+        plt.yticks(fontsize=16)
         plt.tight_layout()
         plt.savefig(f'{experiment_dir}/IMU_{self.label}/gyro.png')
 
         # plot compass data
         plt.figure(figsize=(15, 7))
         plt.plot(time, compass, label='Compass', color='purple')
-        plt.xlabel('Time (s)')
-        plt.ylabel('Compass (degrees)')
-        plt.legend()
-        plt.title('Compass Data over Time')
+        plt.xlabel('Time (s)', fontsize=18)
+        plt.ylabel('Compass (degrees)', fontsize=18)
+        plt.legend(fontsize=16)
+        plt.xticks(fontsize=16)
+        plt.yticks(fontsize=16)
         plt.tight_layout()
         plt.savefig(f'{experiment_dir}/IMU_{self.label}/compass.png')
 

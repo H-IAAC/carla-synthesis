@@ -11,7 +11,7 @@ class GNSS:
     time: float
     tick_time: float
 
-    def __init__(self, label, world, x, y, z, pitch, yaw, roll, tick_time, attached_ob=None, syncronous_mode=True):
+    def __init__(self, label, world, x, y, z, pitch, yaw, roll, tick_time=None, attached_ob=None, syncronous_mode=True):
         blueprint = world.get_blueprint_library().find('sensor.other.gnss')
         if syncronous_mode:
             blueprint.set_attribute('sensor_tick', str(tick_time))
@@ -28,7 +28,7 @@ class GNSS:
             'longitude': data.longitude,
             'altitude': data.altitude
         }
-        self.time += self.tick_time
+        self.time += data.timestamp - self.time
 
     def start(self, experiment_dir):
         if not os.path.exists(f'{experiment_dir}/GNSS_{self.label}'):

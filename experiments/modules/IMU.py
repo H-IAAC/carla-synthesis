@@ -10,6 +10,7 @@ class IMU:
     data: dict
     time: float
     tick_time: float
+    syncronous_mode: bool
 
     def __init__(self, label, world, x, y, z, pitch, yaw, roll, tick_time, attached_ob=None, syncronous_mode=True):
         blueprint = world.get_blueprint_library().find('sensor.other.imu')
@@ -21,6 +22,7 @@ class IMU:
         self.label = label
         self.data = {}
         self.time = 0.0
+        self.syncronous_mode = syncronous_mode
 
     def callback(self, data):
         self.data[self.time] = {
@@ -28,7 +30,8 @@ class IMU:
             'accel': data.accelerometer - carla.Vector3D(x=0,y=0,z=9.81),
             'compass': data.compass
         }
-        self.time += self.tick_time
+        
+        self.time += data.timestamp - self.time
 
     def start(self, experiment_dir):
         if not os.path.exists(f'{experiment_dir}/IMU_{self.label}'):

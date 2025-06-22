@@ -8,13 +8,11 @@ class VelocityModule:
     attached_ob: carla.Actor
     data: dict
     time: float
-    tick_time: float
     
-    def __init__(self, label, obj, tick_time):
+    def __init__(self, label, obj):
         
         self.attached_ob = obj
         self.label = label
-        self.tick_time = tick_time
         self.data = {}
         self.time = 0.0
 
@@ -24,13 +22,14 @@ class VelocityModule:
 
     def tick(self):
         try:
+            world = self.attached_ob.get_world()
+            sim_time = world.get_snapshot().timestamp.elapsed_seconds
             current_data = self.attached_ob.get_velocity()
-            self.data[self.time] = {
+            self.data[sim_time] = {
                 'x': current_data.x,
                 'y': current_data.y,
                 'z': current_data.z
             }
-            self.time += self.tick_time
         except Exception as e:
             print(f"Error getting Velocity data: {e}")
 

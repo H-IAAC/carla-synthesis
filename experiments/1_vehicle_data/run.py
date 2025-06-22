@@ -64,8 +64,8 @@ try:
     camera = Camera("vehicle", world, 0, 0, 2, 0, 0, 0, vehicle)
     imu = IMU("vehicle", world, 0, 0, 0, 0, 0, 0, TICK_TIME, vehicle)
     gnss = GNSS("vehicle", world, 0, 0, 0, 0, 0, 0, TICK_TIME, vehicle)
-    position = PositionModule("vehicle", vehicle, TICK_TIME)
-    velocity = VelocityModule("vehicle", vehicle, TICK_TIME)
+    position = PositionModule("vehicle", vehicle)
+    velocity = VelocityModule("vehicle", vehicle)
 
     imu.start(experiment_dir)
     gnss.start(experiment_dir)

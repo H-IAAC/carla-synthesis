@@ -41,7 +41,7 @@ class PositionModule:
             for time, data in self.data.items():
                 writer.writerow([time, data['x'], data['y'], data['z']])
 
-    def plot_data(self, experiment_dir):
+    def plot_data(self, experiment_dir, midpoint=None):
         time = []
         gps_x = []
         gps_y = []
@@ -57,8 +57,12 @@ class PositionModule:
 
         plt.figure(figsize=(15, 8))
         sc = plt.scatter(gps_x, gps_y, c=time, cmap='viridis', s=10, label='Trajectory')
-        plt.scatter(gps_x[0], gps_y[0], label='Start', color='green', s=100)
-        plt.scatter(gps_x[-1], gps_y[-1], label='End', color='orange', s=100)
+        plt.scatter(gps_x[0], gps_y[0], label='Start', color='cyan', s=100)
+        plt.scatter(gps_x[-1], gps_y[-1], label='End', color='magenta', s=100)
+        
+        if midpoint is not None:
+            plt.scatter(midpoint.x, midpoint.y, label='Midpoint', color='red', s=200, marker='X')
+        
         plt.xlabel('Position X (m)', fontsize=18)
         plt.ylabel('Position Y (m)', fontsize=18)
         plt.legend(fontsize=16)

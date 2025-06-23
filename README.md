@@ -9,10 +9,67 @@ See more projects from the group [here](https://github.com/brgsil/RepoOrganizer)
 
 ## Repository Structure
 
+All experiments conducted are organized under the `experiments` directory. Each subfolder corresponds to a specific test scenario and includes a dedicated `README.md` file with detailed information about the setup, methodology, and results.
 
+### Experiments
+
+- **1_vehicle_data**  
+  Collection of synthetic sensor data from a simulated autonomous vehicle in a controlled environment. Sensors include IMU, GNSS, and camera modules.
+
+- **2_pedestrian_data**  
+  Preliminary tests with pedestrian agents equipped with sensors. The goal was to evaluate the feasibility of capturing motion data from walking agents and identify limitations in CARLA’s sensor support for pedestrians.
+
+- **3_custom_routes**  
+  Implementation of custom navigation routes using waypoints and intermediate stops. The vehicle is guided by a navigation agent (e.g., `BasicAgent`) to follow a defined path.
+
+- **4_vehicle_behaviour**  
+  Comparative analysis of different driving behaviors (Cautious vs. Aggressive) using CARLA’s `BehaviorAgent`. The experiment assesses how driving style affects sensor data and trajectory dynamics.
+
+- **5_custom_maps**  
+  Import and generation of custom maps based on OpenStreetMap (OSM) data. Includes an attempt to enrich OSM maps with elevation data (DEM/MDT) for more realistic terrain modeling.
+
+### Auxiliary Components
+
+- **agents/**  
+  Contains navigation agents used to control vehicle behavior during simulations.
+
+- **modules/**  
+  Provides reusable components for sensor setup, data recording, and post-processing (e.g., plotting and CSV export).
+
+Each experiment is self-contained and can be executed independently. Refer to the corresponding `README.md` files for specific instructions.
+
+---
 
 ## Dependencies / Requirements
 
+### System Requirements
+
+The following requirements should be fulfilled before installing CARLA:
+
+- **Operational System**: Windows 10/11 or Linux systems.
+
+- **GPU**: Minimum 6 GB GPU, although is high recommended using 8 GB.
+
+- **Disk space**: About 20 GB of space.
+
+- **Two TCP ports available**: By default, CARLA uses ports 2000 and 2001. Ensure these ports are not blocked by firewalls or other applications. If you plan to use the Traffic Manager, also make sure that ports 8000 and 8001 are avaliable.
+
+## Requirements
+
+- **Python**:  Python 3.7.
+
+- **Pip**. version 20.3 or higher.
+
+```bash
+python3 --version
+pip3 --version
+```
+
+```bash
+python3.7 -m venv .venv
+source .venv/bin/activate
+pip3 install -r requirements.txt
+```
 
 ## Installation / Usage
 

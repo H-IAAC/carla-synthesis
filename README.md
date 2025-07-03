@@ -47,10 +47,8 @@ Each experiment is self-contained and can be executed independently. Refer to th
 The following requirements should be fulfilled before installing CARLA:
 
 - **Operational System**: Windows 10/11 or Linux systems.
-
-- **GPU**: Minimum 6 GB GPU, although is high recommended using 8 GB.
-
-- **Disk space**: About 20 GB of space.
+- **GPU**: ≥ 6 GB VRAM (dedicated GPU recommended)  
+- **Disk space**: ≥ 20 GB
 
 - **Two TCP ports available**: By default, CARLA uses ports 2000 and 2001. Ensure these ports are not blocked by firewalls or other applications. If you plan to use the Traffic Manager, also make sure that ports 8000 and 8001 are avaliable.
 
@@ -71,12 +69,47 @@ source .venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-## Installation / Usage
+## Installation / Usage of CARLA 0.9.15 (via GitHub Package)
 
+### 1. Download the package
 
-## Citation
+1. Visit the [**0.9.15 release page**](https://github.com/carla-simulator/carla/releases) and download:
+   - `CARLA_0.9.15.tar.gz`
+   - `AdditionalMaps_0.9.15.tar.gz`
 
-  
+## 2. Extract the package
+
+```bash
+sudo mkdir -p /opt/carla-simulator
+sudo tar -xzf CARLA_0.9.15.tar.gz -C /opt/carla-simulator
+cd /opt/carla-simulator
+```
+
+## 3. Import additional assets (maps)
+
+Place `AdditionalMaps_0.9.15.tar.gz` into the Carla root and run:
+
+```bash
+cd /opt/carla-simulator
+tar -xzf ../AdditionalMaps_0.9.15.tar.gz
+./ImportAssets.sh
+```
+
+## 4. Install the Python client
+
+```bash
+pip3 install carla==0.9.15
+pip3 install -r PythonAPI/examples/requirements.txt
+```
+
+## 5. Run the CARLA server
+
+```bash
+cd /opt/carla-simulator
+./CarlaUE4.sh
+```
+---
+
 ## Acknowledgements
 
 This project is part of the Hub for Artificial Intelligence and Cognitive Architectures

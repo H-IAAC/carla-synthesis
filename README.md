@@ -112,5 +112,7 @@ cd /opt/carla-simulator
 
 ## Acknowledgements
 
+This study was financed by the São Paulo Research Foundation (FAPESP), Brasil. Process Number 2024/23473-6.
+
 This project is part of the Hub for Artificial Intelligence and Cognitive Architectures
 (H.IAAC- Hub de Inteligência Artificial e Arquiteturas Cognitivas). Project supported by the brazilian Ministry of Science, Technology and Innovations, with resources from Law No. 8,248, of October 23, 1991.
